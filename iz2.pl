@@ -34,5 +34,5 @@ prime(X, N):-Remainder is X mod N,
 
 
 % Result:
-% 2 ?- primeDivisors(56, X).
+% primeDivisors(56, X).
 % X = [2, 2, 2, 7].
