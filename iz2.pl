@@ -31,3 +31,8 @@ prime(X, N):-Remainder is X mod N,
              Remainder \= 0,
              N1 is N + 1,
              prime(X, N1).
+
+
+% Result:
+% 2 ?- primeDivisors(56, X).
+% X = [2, 2, 2, 7].
