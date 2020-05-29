@@ -24,10 +24,10 @@ findDivisors(Num, Divisor, List, ResultList):- NextDivisor is Divisor + 1,
 
 % Проверка на простоту.
 prime(X):- prime(X, 2).
-prime(0,_):-!,fail.
-prime(1,_):-!,fail.
-prime(X, N):-N2 is N*N, N2 > X,!.
+prime(0,_):-!, fail.
+prime(1,_):-!, fail.
+prime(X, N):-N2 is N*N, N2 > X, !.
 prime(X, N):-Remainder is X mod N,
-            Remainder \= 0,
-            N1 is N + 1,
-            prime(X, N1).
+             Remainder \= 0,
+             N1 is N + 1,
+             prime(X, N1).
