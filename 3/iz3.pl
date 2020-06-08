@@ -8,7 +8,7 @@
 rewriteFile(Path):- see(Path), readAllLines(List), seen, atom_concat('Result', Path, NewPath), tell(NewPath), writeStringsFromList(List), told.
 
 
-% получаем строки
+% рекурсивено получаем строки. читаем одну , записываем и по кругу
 readAllLines(ResultList):- readln(CurStr), 
                            readAllLines(CurStr, [], ResultList).
 
@@ -89,7 +89,7 @@ write_str([H|T]):- atom_chars(H, Chars), write_word(Chars), write(' '), write_st
 
 % put(+Char).
 % Write Char to the current output stream.
-% рекурсивено записываем слова в текущий выходной поток!
+% рекурсивно записываем слова в текущий выходной поток!
 write_word([]):- !.
 write_word([H|T]):- put(H), write_word(T).
 
