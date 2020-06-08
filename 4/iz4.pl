@@ -18,6 +18,7 @@ insert([H|T], Boxer, ResultList):- strongerThan(H, Boxer),
                                    append([Boxer], [H], TempList), 
                                    append(TempList, T, ResultList), 
                                    !.
+
 insert([H|T], Boxer, ResultList):- insert(T, [H], Boxer, ResultList).
 
 insert([], FirstHalf, Boxer, ResultList):- append(FirstHalf, [Boxer], ResultList), 
