@@ -25,6 +25,9 @@ readAllLines(CurStr, CurList, ResultList):- insert(CurList, CurStr, NewList),
 % List1AndList2 is the concatenation of List1 and List
 insert([], NewStr, [NewStr]):- !.
 
+% сравниваем колво гласных в новой строке и голове
+% если так то склеиваем проверяемую строку и бошку в TempList
+% и потом склеиваем templist и t в resultlist
 insert([H|T], NewStr, ResultList):- numOfConsInStr(NewStr, N1), 
                                     numOfConsInStr(H, N2),
                                     N1 < N2, 
@@ -32,17 +35,24 @@ insert([H|T], NewStr, ResultList):- numOfConsInStr(NewStr, N1),
                                     append(TempList, T, ResultList), 
                                     !.
 
+% но если сравнение не прошло, то начинаются эти прикролы
 insert([H|T], NewStr, ResultList):- insert(T, [H], NewStr, ResultList).
 
-insert([], FirstHalf, NewStr, ResultList):- append(FirstHalf, [NewStr], ResultList), !.
+% Так как FirstHalf впервые у нас это просто голова, то для удобства буду называть это "бошкой"
+% если тело пусто, то просто соединяем "бошку" и новую строку в ResultList
+insert([], FirstHalf, NewStr, ResultList):- append(FirstHalf, [NewStr], ResultList), 
+                                            !.
 
+% если было тело, то грубо говоря делаем то же самое, что и при insert в 31 строке
 insert([H|T], FirstHalf, NewStr, ResultList):- numOfConsInStr(NewStr, N1), 
-                                               numOfConsInStr(H, N2), N1 < N2, 
+                                               numOfConsInStr(H, N2), 
+                                               N1 < N2, 
                                                append(FirstHalf, [NewStr], NewFirstHalf), 
                                                append(NewFirstHalf, [H], TempHead), 
                                                append(TempHead, T, ResultList), 
                                                !.
 
+% но если и выше проверка не прошла, то переходим сюда и склеиваем "бошку" с телом, а потом опять insert
 insert([H|T], FirstHalf, NewStr, ResultList):- append(FirstHalf, [H], NewFirstHalf), 
                                                insert(T, NewFirstHalf, NewStr, ResultList).
 
@@ -77,6 +87,7 @@ numOfConsInWord([_|T], CurN, N):- numOfConsInWord(T, CurN, N).
 
 % write(+Term)
 % Write Term to the current output!
+% выводим строки из из списка и записываем по словам!
 writeStringsFromList([]):- !.
 writeStringsFromList([H|T]):- write_str(H), write('\n'), writeStringsFromList(T).
 
