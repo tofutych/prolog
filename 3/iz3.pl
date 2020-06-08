@@ -4,7 +4,7 @@
 
 
 
-% обрабатываем файл, создаем NewPath('Result'+path), с помощью tell выбираем вывод, записываем, готово
+% обрабатываем файл, создаем NewPath('Result'+path), с помощью tell выбираем вывод, записываем, готово.
 rewriteFile(Path):- see(Path), readAllLines(List), seen, atom_concat('Result', Path, NewPath), tell(NewPath), writeStringsFromList(List), told.
 
 
